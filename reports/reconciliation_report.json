@@ -1,0 +1,146 @@
+{
+  "generated_at": "2026-08-28T21:09:32.296530+00:00",
+  "match_rate": 0.791,
+  "total_canonical_records": 67,
+  "matched_canonical_records": 53,
+  "match_group_status_counts": {
+    "matched": 14,
+    "partial": 3,
+    "unmatched": 5,
+    "disputed": 1
+  },
+  "exception_counts_by_type": {
+    "conflicting": 3,
+    "disputed": 1,
+    "partial": 1,
+    "orphan": 3
+  },
+  "exception_counts_by_status": {
+    "acknowledged": 3,
+    "new": 5
+  },
+  "unresolved_exceptions": [
+    {
+      "exception_id": "EXC-00002",
+      "type": "conflicting",
+      "detail": "bank leg present but amount differs by 350.00 from LDG-9701 (NEFT-9701: 4650.0) -- matches the PSP fee (350.0) exactly: looks like a fee formula bug",
+      "suggested_owner": "engineering",
+      "status": "new",
+      "canonical_ids": [
+        "CANON-00024",
+        "CANON-00047",
+        "CANON-00067"
+      ]
+    },
+    {
+      "exception_id": "EXC-00003",
+      "type": "conflicting",
+      "detail": "ledger amount -750.0 conflicts with the matched PSP+bank pair (750.0) for the same counterparty/date",
+      "suggested_owner": "engineering",
+      "status": "new",
+      "canonical_ids": [
+        "CANON-00014",
+        "CANON-00038",
+        "CANON-00057"
+      ]
+    },
+    {
+      "exception_id": "EXC-00004",
+      "type": "disputed",
+      "detail": "chargeback/dispute detected across ledger:LDG-9501, psp:pay_I001, bank:NEFT-9501; amounts differ by sign (reversal), not a plain mismatch",
+      "suggested_owner": "finance_ops",
+      "status": "new",
+      "canonical_ids": [
+        "CANON-00022",
+        "CANON-00045",
+        "CANON-00065"
+      ]
+    },
+    {
+      "exception_id": "EXC-00006",
+      "type": "orphan",
+      "detail": "ledger:LDG-8001 (amount 1750.0) has no counterpart in any other source",
+      "suggested_owner": "finance_ops",
+      "status": "new",
+      "canonical_ids": [
+        "CANON-00019"
+      ]
+    },
+    {
+      "exception_id": "EXC-00008",
+      "type": "orphan",
+      "detail": "bank:NEFT-8001 (amount 4500.0) has no counterpart in any other source",
+      "suggested_owner": "engineering",
+      "status": "new",
+      "canonical_ids": [
+        "CANON-00062"
+      ]
+    }
+  ],
+  "all_exceptions": [
+    {
+      "exception_id": "EXC-00001",
+      "type": "conflicting",
+      "detail": "bank leg present but amount differs by 0.02 from LDG-5001 (NEFT-5001: 4998.98)",
+      "suggested_owner": "engineering",
+      "status": "acknowledged",
+      "acknowledged_by": "RULE-001"
+    },
+    {
+      "exception_id": "EXC-00002",
+      "type": "conflicting",
+      "detail": "bank leg present but amount differs by 350.00 from LDG-9701 (NEFT-9701: 4650.0) -- matches the PSP fee (350.0) exactly: looks like a fee formula bug",
+      "suggested_owner": "engineering",
+      "status": "new",
+      "acknowledged_by": null
+    },
+    {
+      "exception_id": "EXC-00003",
+      "type": "conflicting",
+      "detail": "ledger amount -750.0 conflicts with the matched PSP+bank pair (750.0) for the same counterparty/date",
+      "suggested_owner": "engineering",
+      "status": "new",
+      "acknowledged_by": null
+    },
+    {
+      "exception_id": "EXC-00004",
+      "type": "disputed",
+      "detail": "chargeback/dispute detected across ledger:LDG-9501, psp:pay_I001, bank:NEFT-9501; amounts differ by sign (reversal), not a plain mismatch",
+      "suggested_owner": "finance_ops",
+      "status": "new",
+      "acknowledged_by": null
+    },
+    {
+      "exception_id": "EXC-00005",
+      "type": "partial",
+      "detail": "ledger:LDG-7001, psp:pay_G001 matched, but no corresponding bank record found yet",
+      "suggested_owner": "finance_ops",
+      "status": "acknowledged",
+      "acknowledged_by": "system:late_arrival_reprocessing"
+    },
+    {
+      "exception_id": "EXC-00006",
+      "type": "orphan",
+      "detail": "ledger:LDG-8001 (amount 1750.0) has no counterpart in any other source",
+      "suggested_owner": "finance_ops",
+      "status": "new",
+      "acknowledged_by": null
+    },
+    {
+      "exception_id": "EXC-00007",
+      "type": "orphan",
+      "detail": "bank:NEFT-7001 (amount 3000.0) has no counterpart in any other source",
+      "suggested_owner": "engineering",
+      "status": "acknowledged",
+      "acknowledged_by": "system:late_arrival_reprocessing"
+    },
+    {
+      "exception_id": "EXC-00008",
+      "type": "orphan",
+      "detail": "bank:NEFT-8001 (amount 4500.0) has no counterpart in any other source",
+      "suggested_owner": "engineering",
+      "status": "new",
+      "acknowledged_by": null
+    }
+  ]
+}

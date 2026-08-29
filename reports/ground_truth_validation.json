@@ -1,0 +1,295 @@
+{
+  "total_stories": 20,
+  "passed": 20,
+  "failed": 0,
+  "results": [
+    {
+      "story_id": "1",
+      "description": "clean 1:1 match",
+      "expected_classification": "matched",
+      "passed": true,
+      "checks": [
+        {
+          "check": "eventually matched",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "2",
+      "description": "clean 1:1 match",
+      "expected_classification": "matched",
+      "passed": true,
+      "checks": [
+        {
+          "check": "eventually matched",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "3",
+      "description": "clean 1:1 match",
+      "expected_classification": "matched",
+      "passed": true,
+      "checks": [
+        {
+          "check": "eventually matched",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "4",
+      "description": "clean 1:1 match",
+      "expected_classification": "matched",
+      "passed": true,
+      "checks": [
+        {
+          "check": "eventually matched",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "5",
+      "description": "counterparty alias differs across sources",
+      "expected_classification": "matched via crosswalk",
+      "passed": true,
+      "checks": [
+        {
+          "check": "eventually matched",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "6",
+      "description": "many-to-one net settlement batch BATCH-4471",
+      "expected_classification": "matched as one group net 5120.50",
+      "passed": true,
+      "checks": [
+        {
+          "check": "eventually matched",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "7",
+      "description": "duplicate transaction re-entry (same ledger txn_id twice)",
+      "expected_classification": "duplicate skipped at ingestion not counted as exception",
+      "passed": true,
+      "checks": [
+        {
+          "check": "duplicate was logged as a skip at ingestion",
+          "result": true
+        },
+        {
+          "check": "duplicate itself did not become its own exception",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "8",
+      "description": "missing currency field",
+      "expected_classification": "flagged data quality then resolved via inferred currency",
+      "passed": true,
+      "checks": [
+        {
+          "check": "eventually matched",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "9",
+      "description": "malformed/truncated timestamp (date only)",
+      "expected_classification": "flagged data quality then resolved as same-day match",
+      "passed": true,
+      "checks": [
+        {
+          "check": "eventually matched",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "10",
+      "description": "negative amount data entry error",
+      "expected_classification": "unresolved exception routed to engineering",
+      "passed": true,
+      "checks": [
+        {
+          "check": "not matched",
+          "result": true
+        },
+        {
+          "check": "has a new (unresolved) exception",
+          "result": true
+        },
+        {
+          "check": "routed to engineering",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "11",
+      "description": "currency rounding difference of 0.02",
+      "expected_classification": "conflicting then auto-acknowledged known rounding",
+      "passed": true,
+      "checks": [
+        {
+          "check": "has an acknowledged exception",
+          "result": true
+        },
+        {
+          "check": "has a conflicting-type exception",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "12",
+      "description": "refund modifies ledger amount plus separate psp/bank refund events",
+      "expected_classification": "matched net of refund",
+      "passed": true,
+      "checks": [
+        {
+          "check": "eventually matched",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "13",
+      "description": "late bank confirmation arrives 7 days after original txn",
+      "expected_classification": "unmatched at first run then matched via look-back window reprocessing",
+      "passed": true,
+      "checks": [
+        {
+          "check": "ended up on a revised version (>= 2)",
+          "result": true
+        },
+        {
+          "check": "eventually matched",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "14",
+      "description": "orphan ledger entry with no counterpart anywhere",
+      "expected_classification": "unresolved exception routed to finance_ops",
+      "passed": true,
+      "checks": [
+        {
+          "check": "not matched",
+          "result": true
+        },
+        {
+          "check": "has a new (unresolved) exception",
+          "result": true
+        },
+        {
+          "check": "routed to finance_ops",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "15",
+      "description": "orphan bank credit with no counterpart anywhere",
+      "expected_classification": "unresolved exception routed to engineering (possible missing source integration)",
+      "passed": true,
+      "checks": [
+        {
+          "check": "not matched",
+          "result": true
+        },
+        {
+          "check": "has a new (unresolved) exception",
+          "result": true
+        },
+        {
+          "check": "routed to engineering",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "16",
+      "description": "near-miss timestamp 45 minute drift beyond default tolerance",
+      "expected_classification": "resolved by agent using relaxed tolerance judgment",
+      "passed": true,
+      "checks": [
+        {
+          "check": "eventually matched",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "17",
+      "description": "near-miss counterparty name variant not yet in crosswalk",
+      "expected_classification": "resolved by agent as same crosswalk entity",
+      "passed": true,
+      "checks": [
+        {
+          "check": "eventually matched",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "18",
+      "description": "chargeback dispute with different state strings per source",
+      "expected_classification": "flagged as disputed and routed to finance_ops not simple matched/unmatched",
+      "passed": true,
+      "checks": [
+        {
+          "check": "routed to finance_ops",
+          "result": true
+        },
+        {
+          "check": "classified as disputed (not plain matched/unmatched)",
+          "result": true
+        },
+        {
+          "check": "has a disputed-type exception",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "19",
+      "description": "same instant logged in different timezones (IST vs UTC vs date-only)",
+      "expected_classification": "matched only if timezone normalized correctly else false conflict",
+      "passed": true,
+      "checks": [
+        {
+          "check": "eventually matched",
+          "result": true
+        }
+      ]
+    },
+    {
+      "story_id": "20",
+      "description": "fee miscalculation beyond expected percentage",
+      "expected_classification": "conflicting exception routed to engineering (fee formula bug)",
+      "passed": true,
+      "checks": [
+        {
+          "check": "routed to engineering",
+          "result": true
+        },
+        {
+          "check": "has a conflicting-type exception",
+          "result": true
+        }
+      ]
+    }
+  ]
+}

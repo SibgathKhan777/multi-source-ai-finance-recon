@@ -1,0 +1,21 @@
+story_id,description,ledger_ids,psp_ids,bank_ids,expected_classification,tests_which_issue
+1,clean 1:1 match,LDG-1001,pay_A001,NEFT-1001,matched,baseline
+2,clean 1:1 match,LDG-1002,pay_A002,NEFT-1002,matched,baseline
+3,clean 1:1 match,LDG-1003,pay_A003,NEFT-1003,matched,baseline
+4,clean 1:1 match,LDG-1004,pay_A004,NEFT-1004,matched,baseline
+5,counterparty alias differs across sources,LDG-1005,pay_A005,NEFT-1005,matched via crosswalk,issue1 schema/identity
+6,many-to-one net settlement batch BATCH-4471,"LDG-2001,LDG-2002,LDG-2003,LDG-2004,LDG-2005","pay_B001,pay_B002,pay_B003,pay_B004,pay_B005",NEFT-2001,matched as one group net 5120.50,issue4 cardinality
+7,duplicate transaction re-entry (same ledger txn_id twice),"LDG-3001,LDG-3001",pay_C001,NEFT-3001,duplicate skipped at ingestion not counted as exception,issue6 duplicate delivery
+8,missing currency field,LDG-4001,pay_D001,NEFT-4001,flagged data quality then resolved via inferred currency,issue1 schema
+9,malformed/truncated timestamp (date only),LDG-4002,pay_D002,NEFT-4002,flagged data quality then resolved as same-day match,issue2 timeline
+10,negative amount data entry error,LDG-4003,pay_D003,NEFT-4003,unresolved exception routed to engineering,issue1 schema/data quality
+11,currency rounding difference of 0.02,LDG-5001,pay_E001,NEFT-5001,conflicting then auto-acknowledged known rounding,issue3 not every discrepancy is an error
+12,refund modifies ledger amount plus separate psp/bank refund events,"LDG-6001,LDG-6001","pay_F001,rfnd_F001","NEFT-6001,NEFT-6002",matched net of refund,issue1 schema/identity refund handling
+13,late bank confirmation arrives 7 days after original txn,LDG-7001,pay_G001,NEFT-7001,unmatched at first run then matched via look-back window reprocessing,issue5 late and out-of-order data
+14,orphan ledger entry with no counterpart anywhere,LDG-8001,none,none,unresolved exception routed to finance_ops,true exception
+15,orphan bank credit with no counterpart anywhere,none,none,NEFT-8001,unresolved exception routed to engineering (possible missing source integration),true exception
+16,near-miss timestamp 45 minute drift beyond default tolerance,LDG-9001,pay_H001,NEFT-9001,resolved by agent using relaxed tolerance judgment,issue2 timeline
+17,near-miss counterparty name variant not yet in crosswalk,LDG-9002,pay_H002,NEFT-9002,resolved by agent as same crosswalk entity,issue1 schema/identity
+18,chargeback dispute with different state strings per source,LDG-9501,pay_I001,NEFT-9501,flagged as disputed and routed to finance_ops not simple matched/unmatched,issue1 schema/identity chargeback states
+19,same instant logged in different timezones (IST vs UTC vs date-only),LDG-9601,pay_J001,NEFT-9601,matched only if timezone normalized correctly else false conflict,issue1/issue2 timezone handling
+20,fee miscalculation beyond expected percentage,LDG-9701,pay_K001,NEFT-9701,conflicting exception routed to engineering (fee formula bug),issue4/issue7 cardinality and ownership

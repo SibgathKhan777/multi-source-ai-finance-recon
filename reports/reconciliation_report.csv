@@ -1,0 +1,13 @@
+match_rate,0.791
+total_canonical_records,67
+matched_canonical_records,53
+
+exception_id,type,detail,suggested_owner,status
+EXC-00001,conflicting,bank leg present but amount differs by 0.02 from LDG-5001 (NEFT-5001: 4998.98),engineering,acknowledged
+EXC-00002,conflicting,bank leg present but amount differs by 350.00 from LDG-9701 (NEFT-9701: 4650.0) -- matches the PSP fee (350.0) exactly: looks like a fee formula bug,engineering,new
+EXC-00003,conflicting,ledger amount -750.0 conflicts with the matched PSP+bank pair (750.0) for the same counterparty/date,engineering,new
+EXC-00004,disputed,"chargeback/dispute detected across ledger:LDG-9501, psp:pay_I001, bank:NEFT-9501; amounts differ by sign (reversal), not a plain mismatch",finance_ops,new
+EXC-00005,partial,"ledger:LDG-7001, psp:pay_G001 matched, but no corresponding bank record found yet",finance_ops,acknowledged
+EXC-00006,orphan,ledger:LDG-8001 (amount 1750.0) has no counterpart in any other source,finance_ops,new
+EXC-00007,orphan,bank:NEFT-7001 (amount 3000.0) has no counterpart in any other source,engineering,acknowledged
+EXC-00008,orphan,bank:NEFT-8001 (amount 4500.0) has no counterpart in any other source,engineering,new
