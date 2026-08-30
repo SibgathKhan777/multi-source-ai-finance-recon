@@ -1,0 +1,512 @@
+<title>Reconciliation Pitch Script</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --surface-2: #eeece4;
+    --border: #ddd8ca;
+    --text: #24211b;
+    --text-muted: #6b6759;
+    --accent: #0f766e;
+    --accent-soft: #d8efec;
+    --say: #8a5a1f;
+    --say-soft: #f7ecda;
+    --term-bg: #1c1a15;
+    --term-text: #ece7d9;
+    --term-accent: #5eead4;
+    --term-border: #34302688;
+    --shadow: 0 1px 2px rgba(30, 27, 18, 0.06), 0 8px 24px -12px rgba(30, 27, 18, 0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16150f;
+      --surface: #1e1c15;
+      --surface-2: #262319;
+      --border: #38341f;
+      --text: #efece1;
+      --text-muted: #a39d86;
+      --accent: #5eead4;
+      --accent-soft: #17332f;
+      --say: #e3b567;
+      --say-soft: #2e2413;
+      --term-bg: #0e0d09;
+      --term-text: #ece7d9;
+      --term-accent: #5eead4;
+      --term-border: #3a361f;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px -12px rgba(0, 0, 0, 0.55);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #16150f;
+    --surface: #1e1c15;
+    --surface-2: #262319;
+    --border: #38341f;
+    --text: #efece1;
+    --text-muted: #a39d86;
+    --accent: #5eead4;
+    --accent-soft: #17332f;
+    --say: #e3b567;
+    --say-soft: #2e2413;
+    --term-bg: #0e0d09;
+    --term-text: #ece7d9;
+    --term-accent: #5eead4;
+    --term-border: #3a361f;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px -12px rgba(0, 0, 0, 0.55);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.55;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; text-wrap: balance; margin: 0; }
+
+  header.page {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 2.75rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1.title { font-size: 2.1rem; font-weight: 600; }
+
+  .subtitle { color: var(--text-muted); font-size: 0.98rem; max-width: 58ch; }
+
+  .meta-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  .meta-row b { color: var(--text); font-weight: 500; }
+
+  section.preflight {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem 1.75rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 3rem;
+  }
+
+  section.preflight h2 { font-size: 1.15rem; margin-bottom: 0.9rem; }
+
+  ol.checklist { margin: 0; padding-left: 1.3rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  ol.checklist li { padding-left: 0.2rem; }
+  ol.checklist code { font-size: 0.86rem; }
+
+  .timeline { position: relative; }
+
+  .scene {
+    position: relative;
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .scene .rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .scene .rail .dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    margin-top: 0.4rem;
+  }
+
+  .scene .rail .line {
+    width: 1.5px;
+    flex: 1;
+    background: var(--border);
+    margin-top: 0.35rem;
+  }
+
+  .scene:last-child .rail .line { display: none; }
+
+  .scene .time {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    white-space: nowrap;
+    margin-top: 0.15rem;
+  }
+
+  .scene .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem 1.65rem;
+    box-shadow: var(--shadow);
+  }
+
+  .scene h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .block { margin-top: 1rem; }
+  .block:first-of-type { margin-top: 0; }
+
+  .label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 0.45rem;
+  }
+
+  .label.say { color: var(--say); }
+  .label.do { color: var(--accent); }
+
+  .say-text {
+    background: var(--say-soft);
+    border-left: 3px solid var(--say);
+    padding: 0.8rem 1rem;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.97rem;
+  }
+
+  .do-text {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-bottom: 0.5rem;
+  }
+
+  pre.term {
+    background: var(--term-bg);
+    color: var(--term-text);
+    border: 1px solid var(--term-border);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    overflow-x: auto;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    white-space: pre;
+  }
+
+  pre.term .prompt { color: var(--term-accent); }
+  pre.term .comment { color: #8a8470; }
+
+  .callout {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 0.7rem 0.95rem;
+    font-size: 0.86rem;
+    margin-top: 0.6rem;
+    color: var(--text);
+  }
+
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  footer code { font-size: 0.8rem; }
+
+  @media (max-width: 620px) {
+    .scene { grid-template-columns: 1fr; }
+    .scene .rail { flex-direction: row; }
+    .scene .rail .line { display: none; }
+    .scene .time { margin-top: 0; }
+  }
+</style>
+
+<header class="page">
+  <span class="eyebrow">Pitch script — read while recording</span>
+  <h1 class="title">Multi-Source Finance Reconciliation</h1>
+  <p class="subtitle">
+    A 5-minute walkthrough script. Every command below is real and copy-pasteable —
+    run it live in your own terminal and browser while recording with Loom. Nothing
+    here is staged; the numbers are whatever your machine actually returns.
+  </p>
+  <div class="meta-row">
+    <span>Target length: <b>5:00</b></span>
+    <span>Format: <b>terminal + browser, screen-recorded</b></span>
+    <span>Voice: <b>yours, live</b></span>
+  </div>
+</header>
+
+<section class="preflight">
+  <h2>Before you hit record</h2>
+  <ol class="checklist">
+    <li>Reset to a clean slate so the numbers below match exactly:<br />
+      <code>cd backend &amp;&amp; rm -f recon.db</code></li>
+    <li>Start the backend in one terminal pane (leave it running):<br />
+      <code>source ../.venv/bin/activate &amp;&amp; uvicorn main:app --reload --port 8000</code></li>
+    <li>Start the frontend in a second pane:<br />
+      <code>cd frontend &amp;&amp; npm run dev</code></li>
+    <li>Open <code>http://localhost:3000</code> in a browser tab and confirm the dashboard loads before recording.</li>
+    <li>Arrange your screen so a terminal and the browser tab are both reachable without fumbling — split screen or quick Cmd+Tab.</li>
+  </ol>
+</section>
+
+<div class="timeline">
+
+  <div class="scene">
+    <div class="rail"><span class="dot"></span><span class="line"></span></div>
+    <div>
+      <span class="time">0:00 – 0:25</span>
+      <div class="card">
+        <h2>1 · The problem</h2>
+        <div class="block">
+          <span class="label say">Say</span>
+          <div class="say-text">
+            "Reconciling money across a ledger, a payment processor, and a bank statement is normally a manual slog —
+            checking that amounts line up, chasing down timestamp mismatches, guessing whether 'Razorpay Technologies'
+            in one file is the same company as 'Razorpay' in another. I built a system that does that automatically,
+            and — this is the part that matters — knows the difference between a case it can resolve with confidence
+            and one that genuinely needs a human."
+          </div>
+        </div>
+        <div class="block">
+          <span class="label do">Do</span>
+          <div class="do-text">Face camera or show your project folder in Finder/VS Code. No terminal yet — this is the hook.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="rail"><span class="dot"></span><span class="line"></span></div>
+    <div>
+      <span class="time">0:25 – 1:00</span>
+      <div class="card">
+        <h2>2 · The pipeline, in one breath</h2>
+        <div class="block">
+          <span class="label say">Say</span>
+          <div class="say-text">
+            "It's seven phases. Ingest all three CSVs and flag — never drop — bad rows. Normalize everything onto one
+            schema and convert every timestamp to UTC. Run a five-pass matching engine: exact match, tolerance match,
+            batch net-settlement, and so on. Anything left over goes to an AI agent built with LangGraph, which reasons
+            about near-misses instead of a human eyeballing three spreadsheets. What the agent won't touch becomes a
+            routed exception. And a look-back window catches records that arrive late and revises the right match
+            instead of creating a duplicate."
+          </div>
+        </div>
+        <div class="block">
+          <span class="label do">Do</span>
+          <div class="do-text">Optionally show <code>backend/</code> folder structure — one directory per phase — for two seconds while you talk.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="rail"><span class="dot"></span><span class="line"></span></div>
+    <div>
+      <span class="time">1:00 – 1:35</span>
+      <div class="card">
+        <h2>3 · Prove it's actually tested</h2>
+        <div class="block">
+          <span class="label say">Say</span>
+          <div class="say-text">
+            "Before I show you it working, here's the test suite — one file per phase, run against the real synthetic
+            dataset, not mocks."
+          </div>
+        </div>
+        <div class="block">
+          <span class="label do">Do — type this</span>
+          <pre class="term"><span class="prompt">$</span> cd backend &amp;&amp; source ../.venv/bin/activate
+<span class="prompt">$</span> python -m pytest tests/ -q</pre>
+          <div class="callout">Expected: <b>51 passed</b> in a few seconds. Let it finish on screen — don't cut away.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="rail"><span class="dot"></span><span class="line"></span></div>
+    <div>
+      <span class="time">1:35 – 2:40</span>
+      <div class="card">
+        <h2>4 · Hit the live API</h2>
+        <div class="block">
+          <span class="label say">Say</span>
+          <div class="say-text">
+            "This is the same backend running behind the dashboard — I'm just curling it directly so you can see
+            there's no smoke and mirrors."
+          </div>
+        </div>
+        <div class="block">
+          <span class="label do">Do — type this</span>
+          <pre class="term"><span class="prompt">$</span> curl -s http://localhost:8000/api/report | python3 -m json.tool</pre>
+          <div class="callout">
+            Point at <code>match_rate</code> (~0.79), <code>total_canonical_records</code> (67), and
+            <code>match_group_status_counts</code> — matched / partial / unmatched / disputed.
+          </div>
+        </div>
+        <div class="block">
+          <span class="label say">Say</span>
+          <div class="say-text">
+            "67 records in, about 79% matched automatically. Let's see exactly what didn't."
+          </div>
+        </div>
+        <div class="block">
+          <span class="label do">Do — type this</span>
+          <pre class="term"><span class="prompt">$</span> curl -s "http://localhost:8000/api/exceptions?status=new" | python3 -m json.tool</pre>
+          <div class="callout">Five exceptions come back, each with a <code>detail</code> reason and a <code>suggested_owner</code> — engineering or finance_ops.</div>
+        </div>
+        <div class="block">
+          <span class="label say">Say</span>
+          <div class="say-text">
+            "Let's zoom into one. This transaction's ledger and PSP records both say 5000 rupees, the PSP fee is 350 —
+            but the bank credit only shows 4650. That's short by exactly the fee amount."
+          </div>
+        </div>
+        <div class="block">
+          <span class="label do">Do — type this</span>
+          <pre class="term"><span class="prompt">$</span> curl -s http://localhost:8000/api/exceptions/EXC-00002 | python3 -m json.tool</pre>
+          <div class="callout">
+            Read the <code>detail</code> field aloud: <i>"...matches the PSP fee (350.0) exactly: looks like a fee formula bug"</i> —
+            then note <code>suggested_owner: "engineering"</code>, not finance.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="rail"><span class="dot"></span><span class="line"></span></div>
+    <div>
+      <span class="time">2:40 – 3:10</span>
+      <div class="card">
+        <h2>5 · Where the agent draws the line</h2>
+        <div class="block">
+          <span class="label say">Say</span>
+          <div class="say-text">
+            "Before anything becomes an exception, a LangGraph agent gets first look at the near-misses. A blank
+            currency field it infers as INR, since that's the only currency anywhere in the dataset. A 45-minute
+            settlement delay it accepts as normal processing lag. A counterparty typo it recognizes against the
+            crosswalk table. But — and this is the part I'm proudest of — it explicitly refuses to resolve a negative
+            amount that should've been a positive sale. That's a genuine data-entry error, and the agent doesn't force
+            a plausible-sounding match just because it technically could. It stays flagged, for a human."
+          </div>
+        </div>
+        <div class="block">
+          <span class="label do">Do</span>
+          <div class="do-text">Stay on terminal, or briefly open <code>backend/agent/reasoning.py</code> and scroll past the resolver functions — no need to explain the code, just let it be visible.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="rail"><span class="dot"></span><span class="line"></span></div>
+    <div>
+      <span class="time">3:10 – 4:35</span>
+      <div class="card">
+        <h2>6 · The dashboard</h2>
+        <div class="block">
+          <span class="label say">Say</span>
+          <div class="say-text">
+            "That's the raw API. Here's the same data on the dashboard finance_ops would actually use."
+          </div>
+        </div>
+        <div class="block">
+          <span class="label do">Do</span>
+          <div class="do-text">Switch to the browser tab at <code>localhost:3000</code>.</div>
+        </div>
+        <div class="block">
+          <span class="label say">Say</span>
+          <div class="say-text">"Summary cards up top — match rate, and a count for every status."</div>
+        </div>
+        <div class="block">
+          <span class="label do">Do</span>
+          <div class="do-text">Point at the five summary cards. Click the <b>New</b> filter tab — table narrows to the 5 unresolved exceptions.</div>
+        </div>
+        <div class="block">
+          <span class="label say">Say</span>
+          <div class="say-text">"That's the fee bug we just curled. Clicking it shows the actual raw record from each source, side by side."</div>
+        </div>
+        <div class="block">
+          <span class="label do">Do</span>
+          <div class="do-text">Click the <b>EXC-00002</b> row. Panel opens on the right — point at the three columns (Ledger / PSP export / Bank statement) and the populated vs. empty ones.</div>
+        </div>
+        <div class="block">
+          <span class="label say">Say</span>
+          <div class="say-text">"And acknowledging one is a real write, not a mock — watch the status flip live."</div>
+        </div>
+        <div class="block">
+          <span class="label do">Do</span>
+          <div class="do-text">Click a different row (e.g. the orphan ledger entry), then click <b>Acknowledge</b> in the panel. Status pill flips from red "new" to green "acknowledged" in place.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="rail"><span class="dot"></span></div>
+    <div>
+      <span class="time">4:35 – 5:00</span>
+      <div class="card">
+        <h2>7 · Close</h2>
+        <div class="block">
+          <span class="label say">Say</span>
+          <div class="say-text">
+            "I didn't hand-verify any of this. There's a validation script that checks the pipeline's output against
+            a ground-truth CSV of 20 known scenarios — duplicates, timezone bugs, chargebacks, all of it — and diffs
+            the result automatically."
+          </div>
+        </div>
+        <div class="block">
+          <span class="label do">Do — type this (back in terminal)</span>
+          <pre class="term"><span class="prompt">$</span> PYTHONPATH=. python3 reporting/validate.py</pre>
+          <div class="callout">Expected: <b>20/20 stories passed</b>.</div>
+        </div>
+        <div class="block">
+          <span class="label say">Say</span>
+          <div class="say-text">
+            "Ledger, PSP, and bank — reconciled automatically, every judgment call explained, and only the exceptions
+            that actually need a person land on someone's desk. Code's on GitHub — thanks for watching."
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>Repo: <code>github.com/SibgathKhan777/multi-source-ai-finance-recon</code></span>
+  <span>Runtime target ≈ 5:00</span>
+</footer>
